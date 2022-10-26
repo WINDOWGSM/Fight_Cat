@@ -3,12 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
+using System;
+using System.Security.Cryptography;
+using System.Runtime.CompilerServices;
+using UnityEngine.AI;
 
-public class Lancher : MonoBehaviour
+public class Lancher : MonoBehaviourPunCallbacks
 {
 
     #region private Serializable Fields
-
+    [SerializeField] private byte maxPlayersPerRoom = 4;
     #endregion
 
 
@@ -65,4 +69,35 @@ public class Lancher : MonoBehaviour
 
     #endregion
 
+    #region MonoBehaviourPunCallbacks Callbacks
+
+    public override void OnConnectedToMaster()
+    {
+        Debug.Log("PUN Basics Tutorial/Lancher: OnConnectedToMaster() was called by PUN");
+        //가장 먼저 하려고 하는 것은 잠재적인 기존 방에 가입하려고 하는 것 입니다.
+        //방이 있으면 굳, 없으면 OnJoinRandomFailed()로 다시 호출됩니다.
+        PhotonNetwork.JoinRandomRoom();
+    }
+
+    public override void OnDisconnected(DisconnectCause cause)
+    {
+        Debug.LogWarningFormat("PUN Basics Tutorial/Launcher: OnDisconnected() was called by PUN with reason {0}", cause);
+    }
+
+    public override void OnJoinRandomFailed(short returnCode, string message)
+    {
+        Debug.Log("PUN Basics Tutorial/Launcher:OnJoinRandomFailed() was called by PUN. No random room available, so we create one.\nCalling: PhotonNetwork.CreateRoom");
+
+        //아무 방에도 들어가지 못했거나 아무도 없거나 모두 찼을 수도 있다. 그럴때 새로운 방을 만든다
+        PhotonNetwork.CreateRoom(null, new RoomOptions{MaxPlayers = maxPlayersPerRoom });
+
+    }
+
+    public override void OnJoinedRoom()
+    {
+
+        Debug.Log("PUN Basics Tutorial/Launcher: OnJoinedRoom() called by PUN. Now this client is in a room.");
+    }
+
+    #endregion
 }
