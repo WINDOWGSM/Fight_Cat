@@ -38,7 +38,7 @@ public class Lancher : MonoBehaviourPunCallbacks
 
     private void Start()
     {
-        Connect();
+        
     }
 
     #endregion
