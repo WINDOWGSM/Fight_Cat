@@ -1,15 +1,18 @@
 using Photon.Pun;
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
+using Photon.Realtime;
 
-[RequireComponent(typeof(InputField))]
+
+[RequireComponent(typeof(TMP_InputField))]
 public class PlayerNameInputField : MonoBehaviour
 {
     #region private Constants
 
+    TMP_InputField _inputField;
     const string playerNamePrekey = "PlayerName";
 
     #endregion
@@ -19,7 +22,7 @@ public class PlayerNameInputField : MonoBehaviour
     private void Start()
     {
         string defalutName = string.Empty;
-        InputField _inputField = this.GetComponent<InputField>();
+        _inputField = this.GetComponent<TMP_InputField>();
         if(_inputField != null)
         {
             if (PlayerPrefs.HasKey(playerNamePrekey))
@@ -27,28 +30,33 @@ public class PlayerNameInputField : MonoBehaviour
                 defalutName = PlayerPrefs.GetString(playerNamePrekey);
                 _inputField.text = defalutName;
             }
+            //_inputField.onValueChanged.AddListener(delegate { SetPlayerName(_inputField.text); });
         }
 
         PhotonNetwork.NickName = defalutName;
 
     }
 
+
+
     #endregion
 
     #region Public Methods
 
 
-    public void SetPlayerName(string value)
+    public void SetPlayerName()
     {
-        if (string.IsNullOrEmpty(value))
+        if(_inputField.text != "")
         {
-            Debug.LogError("Player Name is null or empty");
+            Debug.LogError("NoName");
             return;
         }
-        PhotonNetwork.NickName = value;
 
-        PlayerPrefs.SetString(playerNamePrekey, value);
+        PhotonNetwork.NickName = _inputField.text;
+        PlayerPrefs.SetString(playerNamePrekey, _inputField.text);
     }
+
+
 
     #endregion
 }
