@@ -46,12 +46,6 @@ public class PlayerNameInputField : MonoBehaviour
 
     public void SetPlayerName()
     {
-        if(_inputField.text != "")
-        {
-            Debug.LogError("NoName");
-            return;
-        }
-
         PhotonNetwork.NickName = _inputField.text;
         PlayerPrefs.SetString(playerNamePrekey, _inputField.text);
     }

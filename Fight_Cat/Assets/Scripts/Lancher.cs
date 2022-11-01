@@ -13,6 +13,12 @@ public class Lancher : MonoBehaviourPunCallbacks
 
     #region private Serializable Fields
     [SerializeField] private byte maxPlayersPerRoom = 4;
+
+    [Tooltip("사용자가 이름을 입력하고, 시작을 연결하는 UI Panel")]
+    [SerializeField] private GameObject controlPanel;
+    [Tooltip("연결이 진행중임을 알려주는 사용자에게 알리는 Lable")]
+    [SerializeField] private GameObject prograssLable;
+
     #endregion
 
 
@@ -28,7 +34,7 @@ public class Lancher : MonoBehaviourPunCallbacks
 
 
     #region MonoBehaviour CallBacks
-
+    
     private void Awake()
     {
         //포톤 네트워크를 사용할 수 있다는 걸 확실하게 합니다.
@@ -38,7 +44,8 @@ public class Lancher : MonoBehaviourPunCallbacks
 
     private void Start()
     {
-        
+        prograssLable.SetActive(false);
+        controlPanel.SetActive(true);
     }
 
     #endregion
@@ -53,6 +60,9 @@ public class Lancher : MonoBehaviourPunCallbacks
 
     public void Connect()
     {
+        prograssLable.SetActive(true);
+        controlPanel.SetActive(false);
+
         // 연결 여부를 확인하고, 연결되면 가입하고, 그렇지 않으면 서버에 대한 연결을 시작합니다.
         if (PhotonNetwork.IsConnected)
         {
@@ -81,6 +91,8 @@ public class Lancher : MonoBehaviourPunCallbacks
 
     public override void OnDisconnected(DisconnectCause cause)
     {
+        prograssLable.SetActive(false);
+        controlPanel.SetActive(true);
         Debug.LogWarningFormat("PUN Basics Tutorial/Launcher: OnDisconnected() was called by PUN with reason {0}", cause);
     }
 
