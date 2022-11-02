@@ -7,6 +7,7 @@ using System;
 using System.Security.Cryptography;
 using System.Runtime.CompilerServices;
 using UnityEngine.AI;
+using UnityEngine.SceneManagement;
 
 public class Lancher : MonoBehaviourPunCallbacks
 {
@@ -109,6 +110,7 @@ public class Lancher : MonoBehaviourPunCallbacks
     {
 
         Debug.Log("PUN Basics Tutorial/Launcher: OnJoinedRoom() called by PUN. Now this client is in a room.");
+        SceneManager.LoadScene(1);
     }
 
     #endregion
