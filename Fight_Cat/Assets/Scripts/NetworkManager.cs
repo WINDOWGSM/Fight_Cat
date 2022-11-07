@@ -9,8 +9,8 @@ using TMPro;
 public class NetworkManager : MonoBehaviourPunCallbacks
 {
     [SerializeField] TMP_InputField _InputField;
-    [SerializeField] GameObject connectPanel;
-    [SerializeField] GameObject RespawnPanel;
+    [SerializeField] GameObject connectPanel;       //연결하기 위해 Name 받음
+    [SerializeField] GameObject RespawnPanel;       //죽었을 때
 
 
     private void Awake()
@@ -21,6 +21,14 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
     //에디터에서 설정된 Photon 에 연결
     public void Connecting() => PhotonNetwork.ConnectUsingSettings();
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape) && PhotonNetwork.IsConnected)
+        {
+            PhotonNetwork.Disconnect();
+        }
+    }
 
     public override void OnConnectedToMaster()
     {
@@ -34,5 +42,10 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         connectPanel.SetActive(false);    
     }
 
+    public override void OnDisconnected(DisconnectCause cause)
+    {
+        connectPanel.SetActive(true);
+        RespawnPanel.SetActive(false);
+    }
 
 }
