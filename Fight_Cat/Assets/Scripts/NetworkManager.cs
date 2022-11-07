@@ -20,6 +20,19 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     }
 
     //에디터에서 설정된 Photon 에 연결
-    public void Connecting() => PhotonNetwork.ConnectUsingSettings();   
+    public void Connecting() => PhotonNetwork.ConnectUsingSettings();
+
+    public override void OnConnectedToMaster()
+    {
+        PhotonNetwork.LocalPlayer.NickName = _InputField.text;
+        PhotonNetwork.JoinOrCreateRoom("Room", new RoomOptions { MaxPlayers = 6 }, null);
+
+    }
+
+    public override void OnJoinedRoom()
+    {
+        connectPanel.SetActive(false);    
+    }
+
 
 }

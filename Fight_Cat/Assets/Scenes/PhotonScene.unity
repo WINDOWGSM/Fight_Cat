@@ -446,6 +446,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f231c4fb786f3946a6b90b886c48677, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_SendPointerHoverToParent: 1
   m_HorizontalAxis: Horizontal
   m_VerticalAxis: Vertical
   m_SubmitButton: Submit
@@ -964,9 +965,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1031d073d00b26a41a6fa17dde14d638, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _InputField: {fileID: 0}
-  connectPanel: {fileID: 0}
-  disconnectPanel: {fileID: 0}
+  _InputField: {fileID: 2036297909}
+  connectPanel: {fileID: 1124197995}
+  RespawnPanel: {fileID: 2078271364}
 --- !u!1 &1271897369
 GameObject:
   m_ObjectHideFlags: 0
@@ -1185,7 +1186,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1460134274}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1268261179}
+        m_TargetAssemblyTypeName: NetworkManager, Assembly-CSharp
+        m_MethodName: Connecting
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1460134274
 MonoBehaviour:
   m_ObjectHideFlags: 0
