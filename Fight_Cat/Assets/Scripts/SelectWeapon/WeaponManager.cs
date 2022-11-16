@@ -24,6 +24,7 @@ public class WeaponManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
         SetSelectButton();
     }
 
@@ -47,6 +48,6 @@ public class WeaponManager : MonoBehaviour
     private void SetWeapon(WeaponType _weapon)
     {
         myWeapon = _weapon;
-        Debug.Log(myWeapon);
     }
+
 }

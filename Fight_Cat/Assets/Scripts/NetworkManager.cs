@@ -9,8 +9,10 @@ using TMPro;
 public class NetworkManager : MonoBehaviourPunCallbacks
 {
     [SerializeField] TMP_InputField _InputField;
-    [SerializeField] GameObject connectPanel;       //연결하기 위해 Name 받음
-    [SerializeField] GameObject RespawnPanel;       //죽었을 때
+    [SerializeField] GameObject _connectPanel;       //연결하기 위해 Name 받음
+    [SerializeField] GameObject _RespawnPanel;       //죽었을 때
+    [SerializeField] GameObject _selectWeaponPanel; //무기 선택 판넬
+
 
 
     private void Awake()
@@ -19,8 +21,25 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         PhotonNetwork.SerializationRate = 30;
     }
 
+    private void Start()
+    {
+        _connectPanel.SetActive(true);
+        _RespawnPanel.SetActive(false);
+        _selectWeaponPanel.SetActive(true);
+
+    }
+
     //에디터에서 설정된 Photon 에 연결
     public void Connecting() => PhotonNetwork.ConnectUsingSettings();
+
+    /// <summary>
+    /// 무기 선택 버튼 클릭
+    /// </summary>
+    public void SelectBtnClick()
+    {
+        _selectWeaponPanel.SetActive(false);
+
+    }
 
     private void Update()
     {
@@ -39,13 +58,14 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
     public override void OnJoinedRoom()
     {
-        connectPanel.SetActive(false);    
+        _connectPanel.SetActive(false);    
     }
 
     public override void OnDisconnected(DisconnectCause cause)
     {
-        connectPanel.SetActive(true);
-        RespawnPanel.SetActive(false);
+        _RespawnPanel.SetActive(true);
+        _connectPanel.SetActive(true);
+        _RespawnPanel.SetActive(false);
     }
 
 }
