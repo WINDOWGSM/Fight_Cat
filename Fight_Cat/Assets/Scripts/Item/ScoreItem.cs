@@ -4,12 +4,11 @@ using UnityEngine;
 
 public class ScoreItem : Item
 {
-    private int _score = 0;     //점수
+    [SerializeField] private int _score;     //점수
 
     // Start is called before the first frame update
     void Start()
     {
-        _score = Random.Range(10, 21);
     }
 
     // Update is called once per frame
