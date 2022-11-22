@@ -5,8 +5,7 @@ using UnityEngine;
 public class ItemManager : MonoBehaviour
 {
     [SerializeField] GameObject[] itemPrefabs;
-
-    [SerializeField] float spawnTime;
+    [Range(2f, 5f)] [SerializeField] float spawnDelayTime;
 
     // Start is called before the first frame update
     void Start()
@@ -23,15 +22,14 @@ public class ItemManager : MonoBehaviour
 
     IEnumerator SpawnItem()
     {
-        float timer = 0f;
-
         while (true)
         {
 
-            Vector3 rand_Vec = new Vector3(Random.Range(-15, 16), Random.Range(-10, 10),0);
+            Vector3 rand_Vec = new Vector3(Random.Range(-15, 16), Random.Range(-13, 12),0);
 
             Instantiate(itemPrefabs[Random.Range(0, itemPrefabs.Length)],rand_Vec,Quaternion.identity);
 
+            yield return new WaitForSeconds(spawnDelayTime);
 
             yield return new WaitForEndOfFrame();
 
