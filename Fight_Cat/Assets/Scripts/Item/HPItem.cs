@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class HPItem : Item
 {
-    [SerializeField] private int _HP = 30;
+    [SerializeField] private int _hpAmount = 30; //체력 증가량
 
-    protected override void UseItem()
+    protected override void UseItem(PlayerStatus p)
     {
         //HP 회복
+        p._hp = _hpAmount;
 
-        base.UseItem();
+        base.UseItem(p);
     }
 }
