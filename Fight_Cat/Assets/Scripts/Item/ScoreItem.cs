@@ -17,10 +17,10 @@ public class ScoreItem : Item
         
     }
 
-    protected override void UseItem(PlayerStatus p)
+    protected override void UseItem(PlayerController p)
     {
         //플레이어한테 점수 만큼 더하기
-        p._score += this._scoreAmount;
+        p.Score += this._scoreAmount;
 
         base.UseItem(p);
     }
