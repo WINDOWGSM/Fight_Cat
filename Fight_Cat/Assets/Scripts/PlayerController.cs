@@ -10,9 +10,26 @@ public class PlayerController : MonoBehaviour
     private float speed;
 
     private PhotonView PV;
+    public PhotonView _PV
+    {
+        get { return PV; }
+    }
     private Rigidbody2D rb;
     private Animator anim;
 
+    [SerializeField] private int _hp;
+    public int HP
+    {
+        get { return _hp; }
+        set { _hp = value; }
+    }
+
+    [SerializeField] private int _score;
+    public int Score
+    {
+        get { return _score; }  
+        set { _score = value; }
+    }
 
     private void Awake()
     {
