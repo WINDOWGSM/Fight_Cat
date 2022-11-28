@@ -93,6 +93,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 0
+  _hp: 0
+  _score: 0
+  _myWeapon: 0
 --- !u!95 &5287569323731015014
 Animator:
   serializedVersion: 4

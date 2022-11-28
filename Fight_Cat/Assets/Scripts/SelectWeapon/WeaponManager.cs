@@ -3,17 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+public enum WeaponType
+{
+    Bow,
+    Bomb,
+    Hammer,
+    Rifle,
+    Sword,
+    Sycthe
+}
 public class WeaponManager : MonoBehaviour
 {
-    public enum WeaponType
-    {
-        Bow,    
-        Bomb,
-        Hammer,
-        Rifle,
-        Sword,
-        Sycthe
-    }
+
 
     public WeaponType myWeapon;
 
@@ -26,7 +27,6 @@ public class WeaponManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
 
         SetSelectButton();
     }

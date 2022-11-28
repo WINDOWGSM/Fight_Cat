@@ -58,14 +58,20 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
     public override void OnJoinedRoom()
     {
-        _connectPanel.SetActive(false);    
+        _connectPanel.SetActive(false);
+        Spawn();
     }
 
     public override void OnDisconnected(DisconnectCause cause)
     {
-        _RespawnPanel.SetActive(true);
+        _selectWeaponPanel.SetActive(true);
         _connectPanel.SetActive(true);
         _RespawnPanel.SetActive(false);
     }
+    public void Spawn()
+    {
+        PhotonNetwork.Instantiate("Player", Vector3.zero, Quaternion.identity);
+        _RespawnPanel.SetActive(false);
 
+    }
 }

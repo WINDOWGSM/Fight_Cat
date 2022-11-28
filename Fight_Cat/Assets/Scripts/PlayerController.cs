@@ -31,6 +31,8 @@ public class PlayerController : MonoBehaviour
         set { _score = value; }
     }
 
+    public WeaponType _myWeapon;
+
     private void Awake()
     {
         if (PV == null)
